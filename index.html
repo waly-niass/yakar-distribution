@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yakar Distribution — Portfolio</title>
+    <style>
+        :root {
+            --beige: #f5efe6;
+            --accent: #0b0b0b;
+            --muted: #777;
+            --card: #ffffff;
+            --glass: rgba(255, 255, 255, 0.6);
+            --gap: 18px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, Arial, sans-serif;
+            background: linear-gradient(180deg, var(--beige), #efe8dd);
+            color: var(--accent);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header.site-header {
+            background: var(--accent);
+            color: var(--beige);
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .brand .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--beige);
+            display: grid;
+            place-items: center;
+            color: var(--accent);
+            font-weight: 800
+        }
+
+        nav.main-nav {
+            margin-left: auto
+        }
+
+        nav a {
+            color: var(--beige);
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-block
+        }
+
+        nav a:hover,
+        nav a.active {
+            background: var(--beige);
+            color: var(--accent)
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 28px auto;
+            padding: 0 20px
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 24px;
+            align-items: center;
+            margin-bottom: 28px
+        }
+
+        .hero-card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
+            padding: 32px;
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08)
+        }
+
+        .hero h1 {
+            margin: 0 0 10px;
+            font-size: 2rem
+        }
+
+        .hero p {
+            margin: 0;
+            color: var(--muted)
+        }
+
+        /* Search & Filters */
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px
+        }
+
+        .controls input,
+        .controls select {
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e0dcd6;
+            background: transparent
+        }
+
+        /* Products grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--gap)
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 1.05rem
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 18px;
+            font-size: 0.8rem;
+            background: #f0ece6;
+            color: var(--accent)
+        }
+
+        .card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .btn {
+            background: var(--accent);
+            color: var(--beige);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer
+        }
+
+        /* Categories sidebar */
+        .layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 22px
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 88px;
+            height: fit-content;
+            padding: 16px;
+            background: var(--card);
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06)
+        }
+
+        .categories button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer
+        }
+
+        .categories button.active {
+            background: #f3eee6
+        }
+
+        /* Services section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px
+        }
+
+        .service {
+            background: linear-gradient(180deg, var(--card), #fff);
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05)
+        }
+
+        /* Contact form */
+        form.contact {
+            display: grid;
+            gap: 12px;
+            background: var(--card);
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06)
+        }
+
+        form input,
+        form textarea {
+            padding: 10px;
+            border: 1px solid #e6e0d7;
+            border-radius: 8px;
+            width: 100%
+        }
+
+        form button {
+            justify-self: start
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 20px 0;
+            text-align: center;
+            color: var(--muted)
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+
+        .modal .box {
+            background: var(--card);
+            max-width: 760px;
+            width: 100%;
+            border-radius: 12px;
+            padding: 18px
+        }
+
+        /* Responsive */
+        @media (max-width:900px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .layout {
+                grid-template-columns: 1fr
+            }
+
+            nav {
+                display: none
+            }
+        }
+
+        @media (max-width:520px) {
+            .card img {
+                height: 140px
+            }
+
+            header.site-header {
+                padding: 12px
+            }
+
+            .brand {
+                font-size: 0.95rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <div class="logo">
+                <img src="./images/image.png" alt="Yakar Distribution" style="height: 45px; width:auto;">
+            </div>
+
+            <div>
+                <div>Yakar <strong>Distribution</strong></div>
+                <div style="font-size:0.75rem;color:var(--beige);opacity:0.85">
+                    Outils — Services — Sécurité
+                </div>
+            </div>
+        </div>
+
+
+        <nav class="main-nav" id="mainNav">
+            <a href="#home" class="active">Accueil</a>
+            <a href="#produits">Produits</a>
+            <a href="#services">Services</a>
+            <a href="#about">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <button id="menuBtn"
+            style="margin-left:12px;background:transparent;border-radius:8px;padding:8px;border:1px solid rgba(255,255,255,0.08);color:var(--beige)">☰</button>
+    </header>
+
+    <main class="container">
+
+        <section id="home" class="hero">
+            <div class="hero-card">
+                <h1>La quincaillerie des pros & bricoleurs</h1>
+                <p>Découvrez notre catalogue complet d'outils manuels, électriques, matériel de fixation et équipements
+                    de sécurité.
+                    Nous livrons localement et offrons des conseils techniques personnalisés.</p>
+
+                <div class="controls">
+                    <input id="search" placeholder="Rechercher un outil, ex: perceuse" />
+                    <select id="sort">
+                        <option value="">Trier — aucun</option>
+                        <option value="price_asc">Prix croissant</option>
+                        <option value="price_desc">Prix décroissant</option>
+                    </select>
+                    <button class="btn" id="searchBtn">Rechercher</button>
+                </div>
+
+                <div style="margin-top:12px;color:var(--muted);font-size:0.95rem">Catégories rapides:
+                    <span class="tag" onclick="filterCategory('Manuels')">Manuels</span>
+                    <span class="tag" onclick="filterCategory('Electriques')">Électriques</span>
+                    <span class="tag" onclick="filterCategory('Sécurité')">Sécurité</span>
+                </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="background:var(--card);padding:12px;border-radius:12px;display:grid;gap:8px">
+                    <strong>Contact rapide</strong>
+                    <div style="font-size:0.95rem;color:var(--muted)">+221 772317296</div>
+                    <div style="font-size:0.95rem;color:var(--muted)">+221 761278947</div>
+                    <div style="font-size:0.9rem;color:var(--muted)">contact@quincailleriepremium.com</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalog" style="margin-top:18px">
+            <div class="layout">
+
+                <aside class="sidebar">
+                    <h4>Filtrer par catégorie</h4>
+                    <div class="categories" id="categories">
+                        <button data-cat="" class="active">Tous</button>
+                        <button data-cat="Manuels">Outils manuels</button>
+                        <button data-cat="Electriques">Outils électriques</button>
+                        <button data-cat="Fixation">Vis & Boulons</button>
+                        <button data-cat="Sécurité">Sécurité</button>
+                        <button data-cat="Mesure">Mesure & Niveau</button>
+                    </div>
+
+                    <hr />
+                    <h4>Services</h4>
+                    <ul style="padding-left:16px;color:var(--muted)">
+                        <li>Réparation & entretien</li>
+                        <li>Location d'outils</li>
+                        <li>Conseils techniques</li>
+                    </ul>
+                </aside>
+
+                <div>
+                    <h2 id="produits">Catalogue d'outils</h2>
+
+                    <div class="grid" id="productsGrid">
+                        <!-- Product cards injected by JS -->
+                    </div>
+
+                    <div style="margin-top:18px;display:flex;justify-content:center">
+                        <button class="btn" id="loadMore">Charger plus</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="services" style="margin-top:28px">
+            <h2>Services</h2>
+            <div class="services">
+                <div class="service">
+                    <h3>Réparation & entretien</h3>
+                    <p class="muted">Révision complète de vos outils électriques et réparation rapide.</p>
+                </div>
+                <div class="service">
+                    <h3>Location d'outils</h3>
+                    <p class="muted">Location à la journée ou à la semaine — tarifs pour professionnels.</p>
+                </div>
+                <div class="service">
+                    <h3>Conseil & formation</h3>
+                    <p class="muted">Ateliers pour apprendre l'utilisation sécurisée des outils.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" style="margin-top:28px">
+            <h2>À propos</h2>
+            <div style="display:flex;gap:18px;flex-wrap:wrap">
+                <div style="flex:1;min-width:260px">
+                    <p>Quincaillerie Premium fournit depuis 2019 des outils et services aux bricoleurs et
+                        professionnels. Nous sélectionnons des marques fiables et offrons un service client dédié.</p>
+                </div>
+                <div style="flex:1;min-width:260px">
+                    <p>Notre équipe propose des diagnostics, des formations et un atelier de réparation équipé.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="margin-top:28px">
+            <h2>Contact</h2>
+            <div style="display:grid;grid-template-columns:1fr 380px;gap:18px">
+
+                <form class="contact" id="contactForm" onsubmit="return submitContact(event)">
+                    <input type="text" id="name" placeholder="Votre nom" required />
+                    <input type="email" id="email" placeholder="Votre email" required />
+                    <input type="text" id="subject" placeholder="Sujet" />
+                    <textarea id="message" rows="6" placeholder="Votre message" required></textarea>
+                    <button class="btn" type="submit">Envoyer le message</button>
+                </form>
+
+                <div style="background:var(--card);padding:16px;border-radius:12px">
+                    <h4>Infos</h4>
+                    <p style="margin:0 0 6px">Adresse: Pikine ,Parc Lambaye, Dakar, Sénégal</p>
+                    <p style="margin:0 0 6px">Tél: +221 772317296</p>
+                    <p style="margin:0;color:var(--muted)">Horaires: 7j/7</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2025 Quincaillerie Premium — Tous droits réservés • Développé par Waly
+        </footer>
+
+    </main>
+
+    <!-- Product Modal -->
+    <div class="modal" id="modal">
+        <div class="box" role="dialog" aria-modal="true">
+            <button style="float:right" onclick="closeModal()">✕</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ====== Data (example catalog) ====== */
+        const products = [
+            { id: 1, title: 'Marteau XXL', cat: 'Manuels', desc: 'Marteau robuste pour gros travaux', img: 'images/marteau.png' },
+            { id: 2, title: 'Tournevis Set (6)', cat: 'Manuels', desc: 'Set de tournevis plats et cruciformes', img: 'images/tournevis.png' },
+            { id: 3, title: 'Perceuse-visseuse 18V', cat: 'Electriques', desc: 'Batterie longue durée, 2 vitesses', img: 'images/perceuse.png' },
+            { id: 4, title: 'Scie sauteuse', cat: 'Electriques', desc: 'Précise et maniable', img: 'images/scie.png' },
+            { id: 5, title: 'Vis inox 100pcs', cat: 'Fixation', desc: 'Vis inoxydable pour intérieur et extérieur', img: 'images/vis.png' },
+            { id: 6, title: 'Casque de sécurité', cat: 'Sécurité', desc: 'Confortable avec fixation', img: 'images/casque.png' },
+            { id: 7, title: 'Niveau laser', cat: 'Mesure', desc: 'Précision 1mm/m — facile à utiliser', img: 'images/laser.png' },
+            { id: 8, title: 'Pince universelle', cat: 'Manuels', desc: 'Idéale pour serrer et couper fils', img: 'images/pince.png' },
+            { id: 9, title: 'Fer à béton 12mm', cat: 'Construction', desc: 'Barre de fer solide pour construction', img: 'images/fer.png' },
+            { id: 10, title: 'Peinture blanche 20L', cat: 'Peinture', desc: 'Peinture murale intérieure et extérieure', img: 'images/peinture.png' },
+            { id: 11, title: 'Ciment 50kg', cat: 'Construction', desc: 'Sac de ciment haute résistance', img: 'images/ciment.png' },
+            { id: 12, title: 'Robinet lavabo', cat: 'Plomberie', desc: 'Robinet moderne en acier inoxydable', img: 'images/robinet.png' },
+            { id: 13, title: 'Tuyau PVC 3m', cat: 'Plomberie', desc: 'Tuyau pour évacuation et canalisation', img: 'images/tuyau.png' },
+            { id: 14, title: 'Câble électrique 2.5mm', cat: 'Électricité', desc: 'Câble pour installations domestiques', img: 'images/cable.png' },
+            { id: 15, title: 'Interrupteur simple', cat: 'Électricité', desc: 'Interrupteur mural standard', img: 'images/interrupteur.png' },
+            { id: 16, title: 'Ampoule LED 12W', cat: 'Éclairage', desc: 'Économie d’énergie — forte luminosité', img: 'images/ampoule.png' },
+            { id: 17, title: 'Serrure porte', cat: 'Sécurité', desc: 'Serrure métallique robuste', img: 'images/serrure.png' },
+            { id: 18, title: 'Colle forte', cat: 'Fixation', desc: 'Colle pour bois, métal et plastique', img: 'images/colle.png' },
+            { id: 19, title: 'Papier abrasif (lot)', cat: 'Finition', desc: 'Papiers pour ponçage bois et métal', img: 'images/papier.png' },
+            { id: 20, title: 'Chariot brouette', cat: 'Manutention', desc: 'Brouette métallique résistante', img: 'images/chariot.png' }
+        ];
+
+        let shown = 6;
+
+        function renderProducts(list) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            list.slice(0, shown).forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+            <img src="${p.img}" alt="${p.title}" onerror="this.style.opacity=0.8" />
+            <div>
+                <h3>${p.title}</h3>
+                <p style='margin-top:6px'>${p.desc}</p>
+            </div>
+            <div class='meta'>
+                <div><span class='tag'>${p.cat}</span></div>
+                <div style='text-align:right'>
+                    <button class='btn' onclick='openModal(${p.id})'>Détails</button>
+                </div>
+            </div>
+            `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('loadMore').style.display = (shown < list.length) ? 'inline-block' : 'none';
+        }
+
+        function openModal(id) {
+            const p = products.find(x => x.id === id);
+            const content = document.getElementById('modalContent');
+            content.innerHTML = `
+            <div style='display:flex;gap:12px;flex-wrap:wrap'>
+                <div style='flex:1;min-width:260px'>
+                    <img src='${p.img}' style='width:100%;height:250px;object-fit:cover;border-radius:8px'>
+                </div>
+                <div style='flex:1;min-width:260px'>
+                    <h2>${p.title}</h2>
+                    <p style='color:var(--muted)'>${p.desc}</p>
+                </div>
+            </div>
+        `;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+        // Load more
+        document.getElementById('loadMore').addEventListener('click', () => { shown += 4; renderProducts(products); });
+
+        // Search & filter
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const q = document.getElementById('search').value.trim().toLowerCase();
+            let filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+            renderProducts(filtered);
+        });
+
+        document.querySelectorAll('#categories button').forEach(b => {
+            b.addEventListener('click', () => {
+                document.querySelectorAll('#categories button').forEach(x => x.classList.remove('active'));
+                b.classList.add('active');
+                const cat = b.getAttribute('data-cat');
+                if (!cat) renderProducts(products);
+                else renderProducts(products.filter(p => p.cat.toLowerCase() === cat.toLowerCase()));
+            });
+        });
+
+        // Menu mobile
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            const nav = document.getElementById('mainNav');
+            nav.style.display = (nav.style.display === 'block') ? '' : 'block';
+        });
+
+        renderProducts(products);
+
+    </script>
+</body>
+
+</html>
