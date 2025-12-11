@@ -528,6 +528,10 @@
                 <div style='text-align:right'>
                     <button class='btn' onclick='openModal(${p.id})'>Détails</button>
                 </div>
+                <div style='margin-top:8px;text-align:right'>
+    <button class='btn' onclick="commanderProduit('${p.title}')">Commander</button>
+</div>
+
             </div>
             `;
                 grid.appendChild(card);
@@ -582,8 +586,21 @@
         });
 
         renderProducts(products);
+function commanderProduit(nomProduit) {
+    const phone = "221761278947";
+    const email = "abdout3d@gmail.com";
+
+    const message = `Nouvelle commande :\nProduit : ${nomProduit}`;
+
+    // Envoi WhatsApp
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, "_blank");
+
+    // Envoi Email
+    window.location.href = `mailto:${email}?subject=Commande - ${nomProduit}&body=${encodeURIComponent(message)}`;
+}
 
     </script>
 </body>
+
 
 </html>
