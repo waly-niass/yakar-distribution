@@ -600,7 +600,29 @@ function commanderProduit(nomProduit) {
 }
 
     </script>
+    <script>
+/* ====== Fonction Commander Produit ====== */
+function commanderProduit(nomProduit) {
+    const telephone = "221761278947"; 
+    const email = "abdout3d@gmail.com";
+
+    // WhatsApp message
+    const messageWhatsApp = `Commande%20du%20produit%20:%20${encodeURIComponent(nomProduit)}`;
+    const lienWhatsApp = `https://wa.me/${telephone}?text=${messageWhatsApp}`;
+
+    // Email message
+    const subject = `Nouvelle commande : ${nomProduit}`;
+    const body = `Bonjour,%0D%0AJe souhaite commander le produit : ${nomProduit}.`;
+    const mailto = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    // Ouvre WhatsApp + email
+    window.open(lienWhatsApp, "_blank");
+    window.location.href = mailto;
+}
+</script>
+
 </body>
 
 
 </html>
+
